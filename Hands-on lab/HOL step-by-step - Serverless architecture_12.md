@@ -1,30 +1,48 @@
-### Task 3: Add Function App to Key Vault access policy
+## Exercise 8: Rerun the workflow and verify data export
 
-Perform these steps to create an access policy that enables the "Get" secret permission:
+**Duration**: 10 minutes
 
-1. Open your Key Vault service.
+With the latest code changes in place, run your Logic App and verify that the files are successfully exported.
 
-2. Select **Access policies**.
+### Task 1: Run the Logic App
 
-3. Select **+ Add Access Policy**.
+1. Open your ServerlessArchitecture resource group in the Azure portal, then select your Logic App.
 
-    ![In the Key vault Access Policies blade, The Add Access Policy link is highlighted.](media/key-vault-add-access-policy.png "Access policies")
+2. From the **Overview** blade, select **Enable**.
 
-4. Select the **Select principal** section on the Add access policy form.
+    ![In the TollBoothLogic Logic app blade, Overview is selected in the left menu, and the Enable enable button is selected in the right pane.](media/image113.png 'TollBoothLogic blade')
 
-    ![In the Add access policy form, the Select principal field is highlighted.](media/key-vault-add-access-policy-select-principal.png "Add access policy")
+3. Now select **Run Trigger**, then select **Recurrence** to immediately execute your workflow.
 
-5. In the Principal blade, search for your TollBoothFunctionApp Function App's service principal, select it, then select the **Select** button.
+    ![In the TollBoothLogic Logic app blade, Run Trigger and Recurrence are selected.](media/image114.png 'TollBoothLogic blade')
 
-    ![In the Select a principal form, TollBooth is entered into the search field and the Function App's principal is selected in the search results. The Select button is also highlighted.](media/key-vault-principal.png "Principal")
+4. Select the **Refresh** button next to the Run Trigger button to refresh your run history. Select the latest run history item. If the expression result for the condition is **true**, then that means the CSV file should've been exported to Blob storage. Be sure to disable the Logic App so it doesn't keep sending you emails every 15 minutes. Please note that it may take longer than expected to start running, in some cases.
 
-6. Expand the **Secret permissions** and check **Get** under Secret Management Operations.
+    ![In Logic App Designer, in the Condition section, under Inputs, true is highlighted.](media/image115.png 'Logic App Designer ')
 
-    ![In the Add access policy form, the Secret Permissions dropdown is expanded with the Get checkbox checked.](media/key-vault-get-secret-policy.png "Add access policy")
+### Task 2: View the exported CSV file
 
-7. Select **Add** to add the new access policy.
+1. Open your ServerlessArchitecture resource group in the Azure portal, then select your **Storage account** you had provisioned to store uploaded photos and exported CSV files.
 
-8. When you are done, you should have an access policy for the Function App's managed identity. Select **Save** to finish the process.
+2. In the Overview pane of your storage account, select **Containers**.
 
-    ![In the list of Key Vault access policies, the policy that was just created is highlighted. The Save button is selected to commit the changes.](media/key-vault-access-policies.png "Access policies")
+    ![In the Overview blade, Containers is selected.](media/storage-containers.png 'Services section')
+
+3. Select the **export** container.
+
+    ![Export is selected under Name.](media/image117.png 'Export option')
+
+4. You should see at least one recently uploaded CSV file. Select the filename to view its properties.
+
+    ![In the Export blade, under Name, a .csv file is selected.](media/blob-export.png 'Export blade')
+
+5. Select **Download** in the blob properties window.
+
+    ![In the Blob properties blade, the Download button is selected.](media/blob-download.png 'Blob properties blade')
+
+    The CSV file should look similar to the following:
+
+    ![A CSV file displays with the following columns: FileName, LicensePlateText, TimeStamp, and LicensePlateFound.](media/csv.png 'CSV file')
+
+6. The ExportLicensePlates function updates all of the records it exported by setting the exported value to true. This makes sure that only new records since the last export are included in the next one. Verify this by re-executing the script in Azure Cosmos DB that counts the number of documents in the Processed collection where exported is false. It should return 0 unless you've subsequently uploaded new photos.
 

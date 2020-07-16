@@ -1,42 +1,14 @@
-### Task 3: Provision the Event Grid topic
+## Requirements
 
-1. Navigate to the Azure portal, <http://portal.azure.com>.
-
-2. Select **+ Create a resource**, then enter **event grid** into the search box on top. Select **Event Grid Topic** from the results.
-
-    ![In the menu pane of the Azure Portal, the New button is selected. Event grid is typed in the search field, and Event Grid Topic is selected from the search results.](media/image19.png 'Azure Portal')
-
-3. Select the **Create** button on the **Event Grid Topic overview** blade.
-
-4. On the **Create Topic** blade, specify the following configuration options:
-
-    a. **Name:** Unique value for the App name such as **TollboothEventGrid** (ensure the green check mark appears).
-
-    b. Select the Resource Group **ServerlessArchitecture**.
-
-    c. Ensure the **Location** selected is set to the same region as your Resource Group.
-
-    ![In the Create Topic blade, the Name field is set to TollBoothTopic, and the Resource Group selected is ServerlessArchitecture.](media/new-eventgrid-topic.png 'Create Topic blade')
-
-5. Select **Next: Advanced >**.
-
-6. Make sure **Event Grid Schema** is selected as the event schema.
-
-    ![Select the event grid scema.](media/new-eventgrid-topic-advanced.png "Create Topic - Advanced")
-
-7. Select **Review + Create**, then select **Create** in the screen that follows.
-
-8. After the Event Grid topic has completed provisioning, open the account by opening the **ServerlessArchitecture** resource group, and then selecting the **Event Grid** topic name.
-
-7. Select **Overview** in the menu, and then copy the **Topic Endpoint** value.
-
-    ![In the TollBoothTopic blade, Overview is selected, and the copy button next to the Topic Endpoint is called out.](media/image21.png 'TollBoothTopic blade')
-
-8. Select **Access Keys** under Settings in the menu.
-
-9. Within the **Access Keys** blade, copy the **Key 1** value.
-
-    ![In the TollBoothTopic blade, in the left menu under Settings, Access keys is selected. In the listing of Access keys, the copy button next to the Key 1 access key is selected.](media/image22.png 'TollBoothTopic - Access keys blade')
-
-10. Paste the values into a text editor, such as Notepad, for later reference.
+- Microsoft Azure subscription (non-Microsoft subscription).
+- Local machine or a virtual machine configured with (**complete the day before the lab!**):
+  - Visual Studio Community 2019 or greater.
+    - <https://www.visualstudio.com/vs/>
+  - Azure development workload for Visual Studio.
+    - <https://docs.microsoft.com/azure/azure-functions/functions-develop-vs#prerequisites>
+  - .NET Framework 4.7 runtime (or higher) and .NET Core 3.1 SDK.
+    - <https://www.microsoft.com/net/download/windows>
+- Office 365 account. If required, you can sign up for an Office 365 trial at:
+  - <https://portal.office.com/Signup/MainSignup15.aspx?Dap=False&QuoteId=79a957e9-ad59-4d82-b787-a46955934171&ali=1>
+- GitHub account. You can create a free account at <https://github.com>.
 
